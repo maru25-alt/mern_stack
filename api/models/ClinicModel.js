@@ -35,7 +35,8 @@ const clinicSchema = new Schema({
       yearsExpiericence: Number,
     },
   ],
-  surgeries: [{ name: String, price: Number, rating: Number, descripton: String }],
+  url: String,
+  surgeries: [],
   comments: [{ sender: String, message: String, recommend: Boolean }],
 });
 
