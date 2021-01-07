@@ -21,10 +21,9 @@ run().catch((error) => console.log(error.stack));
 
 async function run() {
   await mongoose.connect("mongodb://localhost:27017/kapstone1", { useUnifiedTopology: true, useNewUrlParser: true });
-
-  // Clear the database every time. This is for the sake of example only,
-  // don't do this in prod :)
 }
+
+//get / post request from clinics Collection
 
 app.get("/api/clinics", async (req, res) => {
   const clinics = await ClinicModel.find();
@@ -39,6 +38,8 @@ app.post("/api/clinics", async (req, res) => {
   res.json(clinic);
 });
 
+//get / post request from users Collection
+
 app.get("/api/users", async (req, res) => {
   const users = await UsersModel.find();
   res.json(users);
@@ -50,15 +51,16 @@ app.post("/api/users", async (req, res) => {
   res.json(user);
 });
 
-app.post("/api/messages", async (req, res) => {
-  const message = await new MessageModel(req.body);
-  mongoose.connection.collection("messages").insertOne(message);
-  res.send(message);
-});
+//get / post request from messages Collection
 
 app.get("/api/messages", async (req, res) => {
   const message = await MessageModel.find();
   res.json(message);
+});
+app.post("/api/messages", async (req, res) => {
+  const message = await new MessageModel(req.body);
+  mongoose.connection.collection("messages").insertOne(message);
+  res.send(message);
 });
 
 app.listen(4000);
