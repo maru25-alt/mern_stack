@@ -2,12 +2,16 @@ import express from "express";
 import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
-import { uploader } from "./util";
+import bodyParser from "body-parser";
+
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -47,14 +51,13 @@ app.get("/api/users", async (req, res) => {
   res.json(users);
 });
 
-app.post("/api/users", uploader.single("photoUrl"), async (req, res) => {
+app.post("/api/users", async (req, res) => {
   const { name, password, email } = req.body;
 
   const user = await new UsersModel({
-    name: name,
+    name: req.body.name,
     password: password,
     email: email,
-    photoUrl: req.file.filename,
   });
   mongoose.connection.collection("users").insertOne(user);
   res.json(user);
@@ -67,6 +70,7 @@ app.get("/api/messages", async (req, res) => {
   res.json(message);
 });
 app.post("/api/messages", async (req, res) => {
+  console.log(req.body);
   const message = await new MessageModel(req.body);
   mongoose.connection.collection("messages").insertOne(message);
   res.send(message);

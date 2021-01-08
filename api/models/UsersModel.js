@@ -16,7 +16,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  photoUrl: String,
 });
 
 const UsersModel = mongoose.model("users", UserSchema, "accounts");
