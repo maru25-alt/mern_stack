@@ -2,7 +2,9 @@ import express from "express";
 import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
-import { uploader } from "./util";
+import bodyParser from "body-parser";
+
+import cors from "cors";
 
 import cors from "cors";
 import connectDb from "../db/connection";
@@ -16,6 +18,7 @@ const Port = process.env.Port || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -60,14 +63,25 @@ app.post("/api/clinics", async (req, res) => {
 app.use("/api/messages", require("../api/routes/Message"));
 app.use("/api/accounts/clinics", require("../api/routes/Clinic"));
 
-//get / post request from clinics Collection
+app.get("/api/users", async (req, res) => {
+  const users = await UsersModel.find();
+  res.json(users);
+});
+
 app.post("/api/users", async (req, res) => {
-  const user = await new UsersModel(req.body);
+  const { name, password, email } = req.body;
+
+  const user = await new UsersModel({
+    name: req.body.name,
+    password: password,
+    email: email,
+  });
   mongoose.connection.collection("users").insertOne(user);
   res.json(user);
 });
 
 app.post("/api/messages", async (req, res) => {
+  console.log(req.body);
   const message = await new MessageModel(req.body);
   mongoose.connection.collection("messages").insertOne(message);
   res.send(message);
