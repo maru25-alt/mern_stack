@@ -2,6 +2,7 @@ import express from "express";
 import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
+import { uploader } from "./util";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.get("/api/clinics", async (req, res) => {
 
 app.post("/api/clinics", async (req, res) => {
   const clinic = await new ClinicModel(req.body);
+
   mongoose.connection.collection("clinics").insertOne(clinic);
 
   res.json(clinic);
@@ -45,8 +47,15 @@ app.get("/api/users", async (req, res) => {
   res.json(users);
 });
 
-app.post("/api/users", async (req, res) => {
-  const user = await new UsersModel(req.body);
+app.post("/api/users", uploader.single("photoUrl"), async (req, res) => {
+  const { name, password, email } = req.body;
+
+  const user = await new UsersModel({
+    name: name,
+    password: password,
+    email: email,
+    photoUrl: req.file.filename,
+  });
   mongoose.connection.collection("users").insertOne(user);
   res.json(user);
 });
