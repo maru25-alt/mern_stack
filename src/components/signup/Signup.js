@@ -3,39 +3,21 @@ import "./signup.css";
 
 function SignUpForm() {
   const [accountType, setAccountType] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState({
     password: "",
     confirmPassword: "",
   });
-  const [clinicAcc, setClinicAcc] = useState({
-    name: "",
-    email: "",
-    address: "",
-    password: "",
-  });
-  const [clientAcc, setClientAcc] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
-  const handleChange = (event) => {
-    if (accountType) {
-      setClientAcc((prevState) => {});
-    }
-  };
+  const handleSubmit = async () => {};
 
   const handleAccount = () => {
     setAccountType(!accountType);
   };
 
-  const clinicForm = () => {
-    /* What need's to be in the forms? */
-    return <form className="signup-form" noValidate autoComplete="off"></form>;
-  };
-
-  const clientForm = () => {
-    return <form className="signup-form" noValidate autoComplete="off"></form>;
+  const validate = () => {
+    let check = false;
   };
 
   return (
@@ -62,8 +44,56 @@ function SignUpForm() {
         />
         <label htmlFor="switch_right">Clinic</label>
       </form>
+      <form className="signup-form" noValidate autoComplete="off">
+        <label>
+          Name:
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="text"
+            name="name"
+            value={password.password}
+            onChange={(e) =>
+              setPassword((prevPassword) => {
+                return { ...prevPassword, password: e.target.value };
+              })
+            }
+          />
+        </label>
+        <label>
+          Confirm Password:
+          <input
+            type="text"
+            name="name"
+            value={password.confirmPassword}
+            onChange={(e) =>
+              setPassword((prevPassword) => {
+                return { ...prevPassword, confirmPassword: e.target.value };
+              })
+            }
+          />
+        </label>
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
 
-      {accountType ? clientForm() : clinicForm()}
       <p>
         Aleady have an account? <br />
         <a href="/">Log in here</a>
