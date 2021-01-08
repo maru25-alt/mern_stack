@@ -2,7 +2,6 @@ import express from "express";
 import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
-import bodyParser from "body-parser";
 
 import cors from "cors";
 const { MongoClient } = require("mongodb");
@@ -13,7 +12,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
