@@ -23,7 +23,7 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 | Suri                   | `Product Investor` | Investing      |
 | No-Kap Kapstone        | `QA`               | Fill me out... |
 | Isabella Brooks        | `Product Owner`    | Prodcuct development, wireframing, |
-| Noel Kling             | `Scrum Master`     | Fill me out... |
+| Noel Kling             | `Scrum Master`     | SignupForms, Logins|
 | Git Commit             | `Dev`              | Fill me out... |
 | Git Merge              | `Dev`              | Fill me out... |
 | Rimraf Node_modules    | `Dev`              | Fill me out... |

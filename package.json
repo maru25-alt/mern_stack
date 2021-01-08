@@ -9,6 +9,8 @@
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -19,6 +21,7 @@
   "scripts": {
     "vercel": "vercel dev",
     "dev": "concurrently \"nodemon --watch api\" \"react-scripts start\"",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

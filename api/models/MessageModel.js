@@ -8,5 +8,5 @@ const messageSchema = new Schema({
   timestamp: Number, // String is shorthand for {type: String}
 });
 
-const MessageModel = mongoose.model("Message", messageSchema);
+const MessageModel = mongoose.model("Message", messageSchema, "accounts");
 module.exports = MessageModel;

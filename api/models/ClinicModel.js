@@ -35,14 +35,16 @@ const clinicSchema = new Schema({
       yearsExpiericence: Number,
     },
   ],
-  surgeries: [{ name: String, price: Number, rating: Number, descripton: String }],
+  surgeries: [
+    { name: String, price: Number, rating: Number, descripton: String },
+  ],
   comments: [{ sender: String, message: String, recommend: Boolean }],
 });
 
 // Explicitly create the collection before using it
 // so the collection is capped.
 
-const ClinicModel = mongoose.model("clinic", clinicSchema);
+const ClinicModel = mongoose.model("clinic", clinicSchema, "accounts");
 module.exports = ClinicModel;
 
 // The alternative to the export model pattern is the export schema pattern.
