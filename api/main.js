@@ -156,7 +156,7 @@ app.post("/api/messages", async (req, res) => {
       if (err) throw err;
       var dbo = db.db("kapstone1");
 
-      const Message = new UsersModel(req.body);
+      const Message = new MessageModel(req.body);
 
       await dbo.collection("messages").insertOne(Message);
 
