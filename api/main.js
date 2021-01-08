@@ -5,6 +5,8 @@ import MessageModel from "./models/MessageModel";
 import bodyParser from "body-parser";
 
 import cors from "cors";
+const { MongoClient } = require("mongodb");
+const url = "mongodb://localhost:27017/kapstone1";
 
 const app = express();
 
@@ -20,60 +22,150 @@ app.use(function (req, res, next) {
   next();
 });
 
-const mongoose = require("mongoose");
-
-run().catch((error) => console.log(error.stack));
-
-async function run() {
-  await mongoose.connect("mongodb://localhost:27017/kapstone1", { useUnifiedTopology: true, useNewUrlParser: true });
-}
-
 //get / post request from clinics Collection
 
-app.get("/api/clinics", async (req, res) => {
-  const clinics = await ClinicModel.find();
+app.get("/api/clinics", (request, response) => {
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
 
-  res.json(clinics);
+    async function (err, db) {
+      if (err) throw err;
+      let kapstone = db.db("kapstone1");
+      await kapstone
+        .collection("clinics")
+        .find({})
+        .toArray(function (err, result) {
+          if (err) throw err;
+          const Clinics = result;
+
+          db.close();
+          response.send(Clinics);
+
+          // send the latest 40 messages and the full user list, annotated with active flags
+        });
+    },
+  );
 });
 
-app.post("/api/clinics", async (req, res) => {
-  const clinic = await new ClinicModel(req.body);
+app.post("/api/clinics", (req, res) => {
+  MongoClient.connect(
+    url,
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    },
+    async function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("kapstone1");
 
-  mongoose.connection.collection("clinics").insertOne(clinic);
+      const Clinic = new ClinicModel(req.body);
 
-  res.json(clinic);
+      await dbo.collection("clinics").insertOne(Clinic);
+
+      // Send back the successful response.
+      res.status(201);
+
+      res.send(Clinic);
+    },
+  );
 });
 
 //get / post request from users Collection
 
-app.get("/api/users", async (req, res) => {
-  const users = await UsersModel.find();
-  res.json(users);
+app.get("/api/users", (req, res) => {
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+
+    async function (err, db) {
+      if (err) throw err;
+      let kapstone = db.db("kapstone1");
+      await kapstone
+        .collection("users")
+        .find({})
+        .toArray(function (err, result) {
+          if (err) throw err;
+          const Users = result;
+          db.close();
+
+          res.send(Users);
+
+          // send the latest 40 messages and the full user list, annotated with active flags
+        });
+    },
+  );
 });
 
 app.post("/api/users", async (req, res) => {
-  const { name, password, email } = req.body;
+  MongoClient.connect(
+    url,
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    },
+    async function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("kapstone1");
 
-  const user = await new UsersModel({
-    name: req.body.name,
-    password: password,
-    email: email,
-  });
-  mongoose.connection.collection("users").insertOne(user);
-  res.json(user);
+      const User = new UsersModel(req.body);
+
+      await dbo.collection("users").insertOne(User);
+
+      // Send back the successful response.
+      res.status(201);
+
+      res.send(User);
+    },
+  );
 });
 
 //get / post request from messages Collection
 
 app.get("/api/messages", async (req, res) => {
-  const message = await MessageModel.find();
-  res.json(message);
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+
+    async function (err, db) {
+      if (err) throw err;
+      let kapstone = db.db("kapstone1");
+      await kapstone
+        .collection("messages")
+        .find({})
+        .toArray(function (err, result) {
+          if (err) throw err;
+          const Clinics = result;
+
+          db.close();
+          res.send(Clinics);
+
+          // send the latest 40 messages and the full user list, annotated with active flags
+        });
+    },
+  );
 });
 app.post("/api/messages", async (req, res) => {
-  console.log(req.body);
-  const message = await new MessageModel(req.body);
-  mongoose.connection.collection("messages").insertOne(message);
-  res.send(message);
+  MongoClient.connect(
+    url,
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    },
+    async function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("kapstone1");
+
+      const Message = new UsersModel(req.body);
+
+      await dbo.collection("messages").insertOne(Message);
+
+      // Send back the successful response.
+      res.status(201);
+
+      res.send(Message);
+    },
+  );
 });
 
 app.listen(4000);
