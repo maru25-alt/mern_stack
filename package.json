@@ -7,8 +7,12 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "esm": "^3.2.25",
     "express": "^4.17.1",
+=======
+    "mongo": "^0.1.0",
+>>>>>>> updated-api
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.10",
     "multer": "^1.4.2",
@@ -20,8 +24,12 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+<<<<<<< HEAD
     "vercel": "vercel dev",
     "dev": "concurrently \"nodemon --watch api\" \"react-scripts start\"",
+=======
+    "start": "react-scripts start ",
+>>>>>>> updated-api
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
