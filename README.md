@@ -6,9 +6,9 @@ This is a detailed description of your project.
 
 Once your project has been completed please fill out the links below. These are a part of the rubric and must be completed before the submission deadline
 
-**[Scrum Board URL](https://trello.com/)** |
-**[Deployment URL](https://heroku.com/)** |
-**[Kapstone Pitch URL](https://google.com/)** |
+**[Scrum Board URL](https://trello.com/kapstone5/home)** |
+**[Deployment URL](https://dashboard.heroku.com/apps/kapstone)** |
+**[Kapstone Pitch URL](https://docs.google.com/document/d/1o_otl7M1FJ6qS8JcxO5_pAied-SNQMUDHEFN8jkCUZU/edit?usp=sharing)** |
 **[Group Retrospective Document URL](https://google.com/)** |
 **[Kapstone Feedback Form](https://docs.google.com/forms/d/e/1FAIpQLSeGbm0WcPzlEXHYkWDHcKmXr0fY3cF9sA1zGiP16sjd-0Jg5A/viewform)**
 
@@ -20,10 +20,10 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 
 | Name                   | Scrum Role         | I worked on    |
 | ---------------------- | ------------------ | -------------- |
-| Vince/Tj/Zach/Jon/Suri | `Product Investor` | Investing      |
+| Suri                   | `Product Investor` | Investing      |
 | No-Kap Kapstone        | `QA`               | Fill me out... |
-| Po Po                  | `Product Owner`    | Fill me out... |
-| Scrum Lord             | `Scrum Master`     | Fill me out... |
+| Isabella Brooks        | `Product Owner`    | Prodcuct development, wireframing, |
+| Noel Kling             | `Scrum Master`     | Fill me out... |
 | Git Commit             | `Dev`              | Fill me out... |
 | Git Merge              | `Dev`              | Fill me out... |
 | Rimraf Node_modules    | `Dev`              | Fill me out... |
