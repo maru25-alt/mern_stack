@@ -18,22 +18,15 @@ Once your project has been completed please fill out the links below. These are 
 
 Tell us about your team, who was involved, what role did they fulfill and what did they work on (the more details the better). Also please choose ONE of the staff below that was your investor and remove the others.
 
-| Name                   | Scrum Role         | I worked on    |
-| ---------------------- | ------------------ | -------------- |
-| Suri                   | `Product Investor` | Investing      |
-| No-Kap Kapstone        | `QA`               | Fill me out... |
-| Isabella Brooks        | `Product Owner`    | Prodcuct development, wireframing, |
-<<<<<<< HEAD
-| Noel Kling             | `Scrum Master`     | Fill me out... |
-| Christopher  Davis     | `Dev`              | Fill me out... |
-| Don Moore              | `Dev`              | Fill me out... |
-| M.I.A.                 | `Not Dev`          | Absolutely nothing |
-=======
-| Noel Kling             | `Scrum Master`     | SignupForms, Logins|
-| Git Commit             | `Dev`              | Fill me out... |
-| Git Merge              | `Dev`              | Fill me out... |
-| Rimraf Node_modules    | `Dev`              | Fill me out... |
->>>>>>> 7ca2e244bb201bc87395de13d18f9b675cfc95de
+| Name              | Scrum Role         | I worked on                        |
+| ----------------- | ------------------ | ---------------------------------- |
+| Suri              | `Product Investor` | Investing                          |
+| No-Kap Kapstone   | `QA`               | Fill me out...                     |
+| Isabella Brooks   | `Product Owner`    | Prodcuct development, wireframing, |
+| Noel Kling        | `Scrum Master`     | FrontEnd Forms, Git corrections    |
+| Christopher Davis | `Dev`              | Fill me out...                     |
+| Don Moore         | `Dev`              | Fill me out...                     |
+| M.I.A.            | `Not Dev`          | Absolutely nothing                 |
 
 # Getting Started with Create React App
 
