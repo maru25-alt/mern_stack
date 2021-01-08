@@ -2,6 +2,7 @@ import express from "express";
 import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
+import { uploader } from "./util";
 
 import cors from "cors";
 import connectDb from "../db/connection";
@@ -18,7 +19,10 @@ app.use(cors());
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
 });
@@ -30,7 +34,10 @@ const mongoose = require("mongoose");
 run().catch((error) => console.log(error.stack));
 
 async function run() {
-  await mongoose.connect("mongodb://localhost:27017/kapstone1", { useUnifiedTopology: true, useNewUrlParser: true });
+  await mongoose.connect("mongodb://localhost:27017/kapstone1", {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
 
   // Clear the database every time. This is for the sake of example only,
   // don't do this in prod :)
@@ -44,6 +51,7 @@ app.get("/api/clinics", async (req, res) => {
 
 app.post("/api/clinics", async (req, res) => {
   const clinic = await new ClinicModel(req.body);
+
   mongoose.connection.collection("clinics").insertOne(clinic);
 
   res.json(clinic);
