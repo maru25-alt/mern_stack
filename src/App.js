@@ -1,7 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import useAuth from "./hooks/useAuth";
 
 function App() {
+  const auth = useAuth();
+
+  if (auth.loading || auth.loggingIn || auth.loggingOut) {
+  }
+
   return (
     <div className="App">
       <header className="App-header">
