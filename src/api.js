@@ -13,6 +13,7 @@ export const fetchClinics = async () => {
   return data;
 };
 
+// Sign Up
 export const clinicSignUp = async (data) => {
   const clinicData = new FormData();
   clinicData.append("clinic", data);
