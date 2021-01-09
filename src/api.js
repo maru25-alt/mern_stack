@@ -8,8 +8,19 @@ const axiosInstance = axios.create({
 
 export default axiosInstance;
 
-export const accountSignUp = async (data) => {
-  const formData = new formData();
-  formData.append("account", data);
-  await axiosInstance.post("/clinics", formData);
+export const fetchClinics = async () => {
+  const { data } = await axiosInstance.get("/clinics");
+  return data;
+};
+
+export const clinicSignUp = async (data) => {
+  const clinicData = new FormData();
+  clinicData.append("clinic", data);
+  await axiosInstance.post("/clinics", clinicData);
+};
+
+export const clientSignUp = async (data) => {
+  const clientData = new FormData();
+  clientData.append("client", data);
+  await axiosInstance.post("/users", clientData);
 };
