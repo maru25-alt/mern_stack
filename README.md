@@ -24,9 +24,9 @@ Tell us about your team, who was involved, what role did they fulfill and what d
 | No-Kap Kapstone        | `QA`               | Fill me out... |
 | Isabella Brooks        | `Product Owner`    | Prodcuct development, wireframing, |
 | Noel Kling             | `Scrum Master`     | Fill me out... |
-| Git Commit             | `Dev`              | Fill me out... |
-| Git Merge              | `Dev`              | Fill me out... |
-| Rimraf Node_modules    | `Dev`              | Fill me out... |
+| Christopher  Davis     | `Dev`              | Fill me out... |
+| Don Moore              | `Dev`              | Fill me out... |
+| M.I.A.                 | `Not Dev`          | Absolutely nothing |
 
 # Getting Started with Create React App
 
