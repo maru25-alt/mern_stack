@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 /*
+    Code from Vince St Louis, currently placeholder
  * ConnectedRoute is a component that renders Routes for you
  * It uses the useAuth hook to determine if a route should be rendered
  * or redirected else where based on the auth status
