@@ -19,9 +19,9 @@ route.post("/", async (req, res) => {
 });
 
 route.get("/", async (req, res) => {
-  const accounts = await MessageModel.find();
-  const clinics = accounts.filter((u) => u.account === "clinic");
-  res.json(clinics);
+  const messages = await MessageModel.find();
+
+  res.json(messages);
 });
 
 module.exports = route;
