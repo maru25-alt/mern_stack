@@ -4,8 +4,6 @@ import cors from "cors";
 import connectDb from "../db/connection";
 connectDb();
 const app = express();
-const user = require("../api/routes/User");
-app.use("/api/user", user);
 
 const Port = process.env.Port || 4000;
 
@@ -20,9 +18,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/api/users", require("../api/routes/User"));
+app.use("/api/accounts/users", require("../api/routes/User"));
 app.use("/api/messages", require("../api/routes/Message"));
-app.use("/api/clinics", require("../api/routes/Clinic"));
+app.use("/api/accounts/clinics", require("../api/routes/Clinic"));
 
 //get / post request from clinics Collection
 
