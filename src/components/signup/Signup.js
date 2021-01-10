@@ -28,6 +28,7 @@ function SignUpForm() {
     try {
       event.preventDefault();
       let submittedValues = {
+        account: accountType ? "Clinic" : "Client",
         name: state.name,
         email: state.email,
         password: state.password,
