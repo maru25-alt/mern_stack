@@ -1,9 +1,9 @@
 import MessageModel from "../../db/models/MessageModel";
 
 const express = require("express");
-const messageroute = express.Router();
+const route = express.Router();
 
-messageroute.post("/", async (req, res) => {
+route.post("/", async (req, res) => {
   const { sender, body } = req.body;
   let message = {};
 
@@ -18,4 +18,10 @@ messageroute.post("/", async (req, res) => {
   res.json(message);
 });
 
-module.exports = messageroute;
+route.get("/", async (req, res) => {
+  const accounts = await MessageModel.find();
+  const clinics = accounts.filter((u) => u.account === "clinic");
+  res.json(clinics);
+});
+
+module.exports = route;
