@@ -8,10 +8,23 @@ const AdsSchema = new Schema({
     required: true,
   },
 
-  address: String,
+  address: {
+    type: String,
+    required: true,
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
 
-  doctors: [{ name: String, speacility: String }],
-  percedures: [{ name: String }],
+  siteUrl: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
 });
 
 const AdsModel = mongoose.model("ads", AdsSchema, "ads");

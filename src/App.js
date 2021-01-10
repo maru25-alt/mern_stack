@@ -1,5 +1,6 @@
 import "./App.css";
 import SignUpForm from "./components/singup/Signup";
+import Ads from "./components/ads/Ads";
 import useAuth from "./hooks/useAuth";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <SignUpForm />
+      <Ads />
     </div>
   );
 }
