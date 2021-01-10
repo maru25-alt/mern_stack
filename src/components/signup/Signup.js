@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { clinicSignUp, clientSignUp } from "../../api.js";
+
 import "./signup.css";
 
 function SignUpForm() {
@@ -182,10 +184,10 @@ function SignUpForm() {
 
       <p>
         Aleady have an account? <br />
-        <a href="/">Log in here</a>
       </p>
     </div>
   );
 }
+// Create a link to allow someone to login instead of signing up
 
 export default SignUpForm;
