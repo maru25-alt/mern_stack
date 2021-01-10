@@ -21,6 +21,8 @@ app.use(function (req, res, next) {
 });
 
 app.use("/api/accounts/users", require("../api/routes/User"));
+app.use("/api/ads", require("../api/routes/Ads"));
+
 app.use("/api/messages", require("../api/routes/Message"));
 app.use("/api/accounts/clinics", require("../api/routes/Clinic"));
 
