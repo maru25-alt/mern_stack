@@ -1,8 +1,7 @@
 import "./App.css";
-import SignUpForm from "./components/singup/Signup";
+import SignUpForm from "./components/signup/Signup";
 import Ads from "./components/ads/Ads";
 import useAuth from "./hooks/useAuth";
-import SignUpForm from "./components/signup/Signup";
 import Spinner from "react-bootstrap/Spinner";
 
 function App() {
