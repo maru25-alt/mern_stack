@@ -24,4 +24,10 @@ route.get("/", async (req, res) => {
   res.json(messages);
 });
 
+route.get("/:id", async (req, res) => {
+  const clinics = await MessageModel.find({ _id: req.params.id });
+
+  res.json(clinics);
+});
+
 module.exports = route;

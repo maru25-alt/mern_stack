@@ -19,8 +19,14 @@ route.post("/", async (req, res) => {
 });
 
 route.get("/", async (req, res) => {
-  const accounts = await ClinicModel.find();
-  const clinics = accounts.filter((u) => u.account === "clinic");
+  const clinics = await ClinicModel.find({ account: "clinic" });
+
+  res.json(clinics);
+});
+
+route.get("/:id", async (req, res) => {
+  const clinics = await ClinicModel.find({ _id: req.params.id });
+
   res.json(clinics);
 });
 

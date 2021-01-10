@@ -19,14 +19,13 @@ route.post("/", async (req, res) => {
 });
 
 route.get("/", async (req, res) => {
-  const accounts = await UsersModel.find();
-  const users = accounts.filter((u) => u.account === "user");
+  const users = await UsersModel.find({ account: "user" });
 
   res.json(users);
 });
 
-route.get("/:userId", async (req, res) => {
-  const user = await UsersModel.find({ _id: req.params.userId });
+route.get("/:id", async (req, res) => {
+  const user = await UsersModel.find({ _id: req.params.id });
 
   res.json(user);
 });
