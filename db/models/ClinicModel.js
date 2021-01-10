@@ -2,35 +2,26 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const clinicSchema = new Schema({
+const ClinicSchema = new Schema({
   name: {
     type: String,
     required: true,
+  },
+  email: {
+    type: String,
+    require: true,
   },
   password: {
     type: String,
     required: true,
   },
-
-  address: {
-    st: {
-      type: String,
-      required: true,
-    },
-    zip: {
-      type: Number,
-      required: true,
-    },
-    province: {
-      type: String,
-      required: true,
-    },
+  account: {
+    type: String,
+    required: true,
   },
 });
-// Explicitly create the collection before using it
-// so the collection is capped.
 
-const ClinicModel = mongoose.model("clinic", clinicSchema, "clinics");
+const ClinicModel = mongoose.model("clinics", ClinicSchema, "accounts");
 module.exports = ClinicModel;
 
 // The alternative to the export model pattern is the export schema pattern.
