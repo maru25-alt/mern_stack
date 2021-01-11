@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { clinicSignUp, clientSignUp } from "../../api.js";
 
 import "./signup.css";
