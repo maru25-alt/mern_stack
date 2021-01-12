@@ -23,8 +23,9 @@ function UserSignup({history}) {
         if(selectUser === 'clinic'){
             clinicSignin({name, password, email}, (res) => {
                 const data = res.data;
-                 const {token , user, success, error} = data;
-                 if(success){
+               
+                 if(data?.success){
+                    const {token , user} = data;
                     setLoading(false)
                     dispatch(loggin({
                         id: user._id,
@@ -52,7 +53,7 @@ function UserSignup({history}) {
                  }
 
                  else{
-                    toast.error(error, {
+                    toast.error(data?.error, {
                         position: "top-right",
                         autoClose: false,
                         hideProgressBar: false,
@@ -69,8 +70,9 @@ function UserSignup({history}) {
         else if(selectUser === 'user'){
             clientSignin({name, password, email, account: 'user'}, (res) => {
                  const data = res.data;
-                 const {token , user, success, error} = data;
-                 if(success){
+    
+                 if(data?.success){
+                    const {token , user} = data;
                     setLoading(false)
                     dispatch(loggin({
                         id: user._id,
@@ -98,7 +100,7 @@ function UserSignup({history}) {
                  }
 
                  else{
-                    toast.error(error, {
+                    toast.error(data?.error, {
                         position: "top-right",
                         autoClose: false,
                         hideProgressBar: false,

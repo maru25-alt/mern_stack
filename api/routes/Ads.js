@@ -1,5 +1,5 @@
 import express from "express";
-import AdsModel from "../models/AdsModel";
+import AdsModel from "../models/AdsModel.js";
 const route = express.Router();
 
 route.post("/", async (req, res) => {
@@ -37,4 +37,4 @@ route.delete("/:id", async (req, res) => {
   res.json("deleted" + { ad });
 });
 
-module.exports = route;
+export default route;

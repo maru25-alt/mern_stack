@@ -1,10 +1,10 @@
 import express from "express";
-import ClinicModel from "./models/ClinicModel";
-import UsersModel from "./models/UsersModel";
-import MessageModel from "./models/MessageModel";
+import ClinicModel from "./models/ClinicModel.js";
+import UsersModel from "./models/UsersModel.js";
+import MessageModel from "./models/MessageModel.js";
 import bodyParser from "body-parser";
 import cors from "cors";
-import connectDb from "../db/connection";
+import connectDb from "../db/connection.js";
 
 //import routes
 const user = require("../api/routes/User");
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 //routes
 app.use("/api/messages", message);
 app.use("/api/accounts/clinics", clinic);
-app.use("/api/user", user);
+app.use("/api/users", user);
 app.use("/api/ads", ads);
 
 

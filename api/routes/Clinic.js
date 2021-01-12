@@ -1,4 +1,4 @@
-import ClinicModel from "../models/ClinicModel";
+import ClinicModel from "../models/ClinicModel.js";
 
 const express = require("express");
 const route = express.Router();
@@ -40,4 +40,4 @@ route.delete("/:id", async (req, res, d) => {
   res.send("Record doesn't exist or already deleted"); // Use your response code
 });
 
-module.exports = route;
+export default route;

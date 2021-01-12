@@ -20,28 +20,29 @@ export const clinicSignup = async (data, callback) => {
   .then(res => callback(res))
   .catch(err => {
       console.log(err)
-      callback(err)
+      alert('something when wrong , try again later')
+      callback({error: "something when wrong , try again later"})
   })
 }
 
 
 //signup client
 export const clientSignup = async (data, callback) => {
-  await axiosInstance.post("/user/signup", data)
+  await axiosInstance.post("/users/signup", data)
   .then(res => callback(res))
   .catch(err => {
     console.log(err)
-    callback(err)
+    callback({error: "something when wrong , try again later"})
  });
 };
 
 //signin client
 export const clientSignin = async (data, callback) => {
-  await axiosInstance.post("/user/signin", data)
+  await axiosInstance.post("/users/signin", data)
   .then(res => callback(res))
   .catch(err => {
     console.log(err)
-    callback(err)
+    callback({error: "something when wrong , try again later"})
   });
 };
 
@@ -52,6 +53,6 @@ export const clinicSignin = async (data, callback) => {
   .then(res => callback(res))
   .catch(err => {
     console.log(err)
-    callback(err)
+    callback({error: "something when wrong , try again later"})
 });
 };
