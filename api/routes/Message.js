@@ -1,4 +1,4 @@
-import MessageModel from "../../db/models/MessageModel";
+import MessageModel from "../models/MessageModel";
 
 const express = require("express");
 const route = express.Router();

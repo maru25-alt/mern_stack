@@ -6,10 +6,11 @@ import "./App.css";
 import Navigation from './components/navigation/Navigation'
 import Footer from './components/navigation/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Page404 from './pages/Page404';
 import {routes} from './routes/routes'
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
+import {ToastContainer} from 'react-toastify';
 
 function App() {
   //const auth = useAuth();
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <div className="App">
+       <ToastContainer/>
       <Navigation/>
       <div className="app__container">
       <Router>

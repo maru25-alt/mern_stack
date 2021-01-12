@@ -1,4 +1,4 @@
-import ClinicModel from "../../db/models/ClinicModel";
+import ClinicModel from "../models/ClinicModel";
 
 const express = require("express");
 const route = express.Router();

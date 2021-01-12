@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("../config/mongodb");
 
 const { Schema } = mongoose;
 
@@ -14,6 +14,12 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  date: { 
+    type: Date, default: Date.now
+   },
+   photoUrl: {
+    type: String,
   },
   account: {
     type: String,

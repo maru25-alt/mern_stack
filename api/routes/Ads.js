@@ -1,5 +1,5 @@
 import express from "express";
-import AdsModel from "../../db/models/AdsModel";
+import AdsModel from "../models/AdsModel";
 const route = express.Router();
 
 route.post("/", async (req, res) => {

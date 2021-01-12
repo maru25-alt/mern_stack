@@ -3,21 +3,35 @@ import ClinicModel from "./models/ClinicModel";
 import UsersModel from "./models/UsersModel";
 import MessageModel from "./models/MessageModel";
 import bodyParser from "body-parser";
-
 import cors from "cors";
-
 import connectDb from "../db/connection";
-connectDb();
-const app = express();
+
+//import routes
 const user = require("../api/routes/User");
-app.use("/api/user", user);
+const message = require("../api/routes/Message");
+const clinic = require("../api/routes/Clinic");
+const ads = require("../api/routes/Ads")
 
-const Port = process.env.Port || 4000;
+//conect to db
+connectDb();
 
+//create app
+const app = express();
+const PORT = process.env.Port || 4000;
+
+//middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
+
+//routes
+app.use("/api/messages", message);
+app.use("/api/accounts/clinics", clinic);
+app.use("/api/user", user);
+app.use("/api/ads", ads);
+
+
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,8 +43,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/api/accounts/users", require("../api/routes/User"));
-app.use("/api/ads", require("../api/routes/Ads"));
+
+
+
+
+
+
+
+
+
 const mongoose = require("mongoose");
 
 run().catch((error) => console.log(error.stack));
@@ -53,14 +74,11 @@ app.get("/api/clinics", async (req, res) => {
 
 app.post("/api/clinics", async (req, res) => {
   const clinic = await new ClinicModel(req.body);
-
   mongoose.connection.collection("clinics").insertOne(clinic);
 
   res.json(clinic);
 });
 
-app.use("/api/messages", require("../api/routes/Message"));
-app.use("/api/accounts/clinics", require("../api/routes/Clinic"));
 
 app.get("/api/users", async (req, res) => {
   const users = await UsersModel.find();
@@ -91,6 +109,8 @@ app.get("/api/messages", async (req, res) => {
   res.json(message);
 });
 
-app.listen(4000);
 
-app.listen(Port, () => console.log("yooo from sever"));
+
+app.listen(PORT, () => {
+  return console.log(`listening on port ${PORT}`)
+})

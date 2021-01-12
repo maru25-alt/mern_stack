@@ -3,10 +3,11 @@ import {Form, Button, InputGroup, Spinner} from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import '../css/signin.css'
 //import axios from '../app/axios';
-//import {  toast } from 'react-toastify';
-//import { useDispatch} from 'react-redux';
-//import {loggin} from '../features/user/userSlice';
-//import  {LoginString} from '../app/localStorage'
+import {  toast } from 'react-toastify';
+import {clientSignin, clinicSignin} from '../api'
+import { useDispatch} from 'react-redux';
+import {loggin} from '../features/user/userSlice';
+import  {LoginString} from '../localStorage'
 
 function UserSignup({history}) {
     const [email, setEmail] = useState('');
@@ -15,86 +16,115 @@ function UserSignup({history}) {
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const [selectUser, setUser] = useState("")
-    //const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const handleSignup = () => {
-        console.log('vvhvgh')
         setLoading(true)
-        if(!selectUser){
-            alert('Please select account type')
+        if(selectUser === 'clinic'){
+            clinicSignin({name, password, email}, (res) => {
+                const data = res.data;
+                 const {token , user, success, error} = data;
+                 if(success){
+                    setLoading(false)
+                    dispatch(loggin({
+                        id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        photoUrl: user.photoUrl,
+                        type: selectUser
+                    }))
+                    localStorage.setItem(LoginString.EMAIL, user.email);
+                    localStorage.setItem(LoginString.NAME, user.name);
+                    localStorage.setItem(LoginString.PhotoURL, user.photoUrl);
+                    localStorage.setItem(LoginString.ID, user._id);
+                    localStorage.setItem(LoginString.TOKEN, token);
+                    localStorage.setItem(LoginString.TYPE, selectUser);
+                    toast.success('successfully logged in', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                    history.push('/')
+                 }
+
+                 else{
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                     })  
+                   setLoading(false)
+                 }
+               
+            })
+        }
+        else if(selectUser === 'user'){
+            clientSignin({name, password, email, account: 'user'}, (res) => {
+                 const data = res.data;
+                 const {token , user, success, error} = data;
+                 if(success){
+                    setLoading(false)
+                    dispatch(loggin({
+                        id: user._id,
+                        name: user.name,
+                        email: user.email,
+                        photoUrl: user.photoUrl,
+                        type: selectUser
+                    }))
+                    localStorage.setItem(LoginString.EMAIL, user.email);
+                    localStorage.setItem(LoginString.NAME, user.name);
+                    localStorage.setItem(LoginString.PhotoURL, user.photoUrl);
+                    localStorage.setItem(LoginString.ID, user._id);
+                    localStorage.setItem(LoginString.TOKEN, token);
+                    localStorage.setItem(LoginString.TYPE, selectUser);
+                    toast.success('successfully logged in', {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    })
+                    history.push('/')
+                 }
+
+                 else{
+                    toast.error(error, {
+                        position: "top-right",
+                        autoClose: false,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                     })  
+                   setLoading(false)
+                 }
+            })
+        }
+        else{
+            toast.error("Please select account type", {
+                position: "top-right",
+                autoClose: false,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            })
+            setLoading(false)  
         }
     }
-    // const handleSignin = () => {
-    //     if(selectUser === ""){
-    //         toast.error("Please select user", {
-    //             position: "top-right",
-    //             autoClose: false,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //         })  
-    //         return 0
-    //     }
-    //     setLoading(true)
-    //     let url = selectUser === 'clinic' ? "/clinics/create" : "/users/signup"
-    //     console.log(url)
-    //     axios.post(url, {email, password, name}).then(res => {
-    //         const {data} = res;
-    //         console.log(res)
-    //         if(data.error){
-    //             toast.error(data.error, {
-    //                 position: "top-right",
-    //                 autoClose: false,
-    //                 hideProgressBar: false,
-    //                 closeOnClick: true,
-    //                 pauseOnHover: true,
-    //                 draggable: true,
-    //                 progress: undefined,
-    //             })  
-    //             setLoading(false)
-    //         }
-    //         else if(data.user){
-    //             const {token , user} = data;
-    //             setLoading(false)
-    //             toast.success('successfully logged in', {
-    //                 position: "top-right",
-    //                 autoClose: false,
-    //                 hideProgressBar: false,
-    //                 closeOnClick: true,
-    //                 pauseOnHover: true,
-    //                 draggable: true,
-    //                 progress: undefined,
-    //             })
-    //             localStorage.setItem(LoginString.EMAIL, user.email);
-    //             localStorage.setItem(LoginString.NAME, user.name);
-    //             localStorage.setItem(LoginString.PhotoURL, user.photoUrl);
-    //             localStorage.setItem(LoginString.ID, user._id);
-    //             localStorage.setItem(LoginString.TOKEN, user.token);
-    //             localStorage.setItem(LoginString.USERTYPE, selectUser);
-    //             dispatch(loggin({
-    //                  ...user
-    //             }))
-    //             selectUser  === 'clinic' ? history.push(`/clinic/${user.name}/${user._id}`) :  history.push(`/user/${user.name}/${user._id}`)
-    //         }
-    //         else{
-    //             console.log('mmmmmmmmm');
-    //             setLoading(false)
-    //         }
-    //     }).catch(() => {
-    //         setLoading(false)
-    //         toast.error('sorry something went wrong , try again later', {
-    //             position: "top-right",
-    //             autoClose: false,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //         })  
-    //     })
-    // }
+   
     return (
         <div className="signin">
             <Form className="signin__form"  onSubmit={handleSubmit(handleSignup)}>
@@ -102,7 +132,7 @@ function UserSignup({history}) {
                <div  className="mb-3 text-center">
                     <h6><strong>Select Account Type</strong> </h6>
                     <div className="signin__selectUser">
-                       <Form.Check onClick={(e) => setUser(e.target.id)} inline label="Client" type="radio" id="client" name="user" />
+                       <Form.Check onClick={(e) => setUser(e.target.id)} inline label="Client" type="radio" id="user" name="user" />
                        <Form.Check onClick={(e) => setUser(e.target.id)} inline label="Clinic" type="radio" id="clinic" name="user" />
                     </div>
                  </div>
