@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import '../css/signin.css'
 //import axios from '../app/axios';
 import {  toast } from 'react-toastify';
-import {clientSignin, clinicSignin} from '../api'
+import {clientSignup, clinicSignup} from '../api'
 import { useDispatch} from 'react-redux';
 import {loggin} from '../features/user/userSlice';
 import  {LoginString} from '../localStorage'
+import { FormattedMessage} from 'react-intl';
 
 function UserSignup({history}) {
     const [email, setEmail] = useState('');
@@ -15,15 +16,16 @@ function UserSignup({history}) {
     const [name, setName] = useState('')
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, errors } = useForm();
-    const [selectUser, setUser] = useState("")
+    const [selectUser, setUser] = useState("");
+    const [confirmPassword, setconfirmPassword] = useState('')
     const dispatch = useDispatch()
 
-    const handleSignup = () => {
+    const handleSignup = async() => {
         setLoading(true)
         if(selectUser === 'clinic'){
-            clinicSignin({name, password, email}, (res) => {
+           await clinicSignup({name, password, email, account: selectUser}, (res) => {
                 const data = res.data;
-               
+                console.log(data, "clinic")
                  if(data?.success){
                     const {token , user} = data;
                     setLoading(false)
@@ -31,12 +33,12 @@ function UserSignup({history}) {
                         id: user._id,
                         name: user.name,
                         email: user.email,
-                        photoUrl: user.photoUrl,
+                        photoUrl: user.logo,
                         type: selectUser
                     }))
                     localStorage.setItem(LoginString.EMAIL, user.email);
                     localStorage.setItem(LoginString.NAME, user.name);
-                    localStorage.setItem(LoginString.PhotoURL, user.photoUrl);
+                    localStorage.setItem(LoginString.PhotoURL, user.logo);
                     localStorage.setItem(LoginString.ID, user._id);
                     localStorage.setItem(LoginString.TOKEN, token);
                     localStorage.setItem(LoginString.TYPE, selectUser);
@@ -49,7 +51,7 @@ function UserSignup({history}) {
                         draggable: true,
                         progress: undefined,
                     })
-                    history.push('/')
+                    history.push(`/clinic/${user?.name}/${user?._id}`)
                  }
 
                  else{
@@ -68,9 +70,10 @@ function UserSignup({history}) {
             })
         }
         else if(selectUser === 'user'){
-            clientSignin({name, password, email, account: 'user'}, (res) => {
+            console.log(selectUser, "user")
+            await clientSignup({name, password, email, account: selectUser}, (res) => {
                  const data = res.data;
-    
+                 console.log(data, "clinic")
                  if(data?.success){
                     const {token , user} = data;
                     setLoading(false)
@@ -79,7 +82,7 @@ function UserSignup({history}) {
                         name: user.name,
                         email: user.email,
                         photoUrl: user.photoUrl,
-                        type: selectUser
+                        account: selectUser
                     }))
                     localStorage.setItem(LoginString.EMAIL, user.email);
                     localStorage.setItem(LoginString.NAME, user.name);
@@ -96,7 +99,7 @@ function UserSignup({history}) {
                         draggable: true,
                         progress: undefined,
                     })
-                    history.push('/')
+                    history.push(`/user/${user?.name}/${user?._id}`)
                  }
 
                  else{
@@ -114,6 +117,7 @@ function UserSignup({history}) {
             })
         }
         else{
+            console.log(selectUser)
             toast.error("Please select account type", {
                 position: "top-right",
                 autoClose: false,
@@ -130,17 +134,29 @@ function UserSignup({history}) {
     return (
         <div className="signin">
             <Form className="signin__form"  onSubmit={handleSubmit(handleSignup)}>
-               <h4 className="text-center"> <strong> Create your account </strong></h4>
+               <h4 className="text-center"> <strong> <FormattedMessage id="creatAcc"/> </strong></h4>
                <div  className="mb-3 text-center">
-                    <h6><strong>Select Account Type</strong> </h6>
+                    <h6><strong><FormattedMessage id="selAcc"/></strong> </h6>
                     <div className="signin__selectUser">
-                       <Form.Check onClick={(e) => setUser(e.target.id)} inline label="Client" type="radio" id="user" name="user" />
-                       <Form.Check onClick={(e) => setUser(e.target.id)} inline label="Clinic" type="radio" id="clinic" name="user" />
+                       <Form.Check 
+                         onClick={(e) => setUser(e.target.id)} 
+                         inline 
+                         label={ <FormattedMessage  id="client"/>}
+                         type="radio" 
+                         id="user" 
+                         name="user" />
+                       <Form.Check 
+                        onClick={(e) => setUser(e.target.id)} 
+                        inline 
+                        label={<FormattedMessage id="clinic"/> }
+                        type="radio" 
+                        id="clinic" 
+                        name="user" />
                     </div>
                  </div>
                  <InputGroup controlid="formBasicEmail" className="mb-3">
                     <InputGroup.Prepend>
-                          <InputGroup.Text style={{width: "100px"}} id="basic-addon1">Name</InputGroup.Text>
+                          <InputGroup.Text style={{width: "150px"}} id="basic-addon1"> <FormattedMessage id="name"/> </InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control 
                     value={name} 
@@ -150,10 +166,10 @@ function UserSignup({history}) {
                     type="text" 
                     placeholder="Enter name" />
                 </InputGroup>
-                {errors.name && <span className="text-danger mb-2">This field is required</span>}
+                {errors.name && <span className="text-danger mb-2"><FormattedMessage id="fieldReq"/></span>}
                 <InputGroup controlid="formBasicEmail" className="mb-3">
                     <InputGroup.Prepend>
-                          <InputGroup.Text style={{width: "100px"}} id="basic-addon1">Email</InputGroup.Text>
+                          <InputGroup.Text style={{width: "150px"}} id="basic-addon1"><FormattedMessage id="email"/></InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control 
                     value={email} 
@@ -163,10 +179,10 @@ function UserSignup({history}) {
                     type="email" 
                     placeholder="Enter email" />
                 </InputGroup>
-                {errors.email && <span className="text-danger mb-2">Valid Email is required</span>}
+                {errors.email && <span className="text-danger mb-2"><FormattedMessage id="emailErr"/> </span>}
                 <InputGroup controlid="formBasicPassword" className="mb-3">
                     <InputGroup.Prepend>
-                          <InputGroup.Text  style={{width: "100px"}} id="basic-addon1">Password</InputGroup.Text>
+                          <InputGroup.Text  style={{width: "150px"}} id="basic-addon1"><FormattedMessage id="passowrd"/></InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control  
                     value={password} 
@@ -176,12 +192,25 @@ function UserSignup({history}) {
                     type="password" 
                     placeholder="Password" />
                 </InputGroup>
-                {errors.password && <span className="text-danger mb-5">Strong Password with at least 6 characters is required</span>}
+                {errors.password && <span className="text-danger mb-5"><FormattedMessage id="pssErr"/> </span>}
+                <InputGroup controlid="formBasicPassword" className="mb-3">
+                    <InputGroup.Prepend>
+                          <InputGroup.Text  style={{width: "150px"}} id="basic-addon1"><FormattedMessage id="confPassword"/></InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control  
+                    value={confirmPassword} 
+                    onChange={e => setconfirmPassword(e.target.value)} 
+                    name="confirmpassword" 
+                    ref={register({ required: true, minLength: 6 , validate: value => value === password })} 
+                    type="password" 
+                    placeholder="Confirm Password" />
+                </InputGroup>
+                {errors.confirmpassword && <span className="text-danger mb-5"><FormattedMessage id="confpassErr"/></span>}
                   <div className="form-group text-center">
                       <label className="form-check-label" htmlFor="agreement">
-                       By signing up you are  agreeing  to our Terms and Conditions
+                          <FormattedMessage id="byAgree"/> 
                       </label>
-                      <a href="/signin" className="d-block danger-link">Already have an account</a>
+                      <a href="/signin" className="d-block danger-link"><FormattedMessage id="alrAcc"/></a>
                   </div>
                  <Button disabled={loading}  type="submit" className="w-100 primary-btn btn mt-5">
                      {loading &&  <Spinner
@@ -191,7 +220,8 @@ function UserSignup({history}) {
                             role="status"
                             aria-hidden="true"
                             />}
-                    Submit
+                   
+                    <FormattedMessage id="submit"/>
                 </Button>
             </Form>
         </div>

@@ -1,4 +1,4 @@
-const mongoose = require("../config/mongodb");
+import mongoose from "../config/mongodb.js";
 
 const { Schema } = mongoose;
 
@@ -28,4 +28,4 @@ const AdsSchema = new Schema({
 });
 
 const AdsModel = mongoose.model("ads", AdsSchema, "ads");
-module.exports = AdsModel;
+export default AdsModel;

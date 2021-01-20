@@ -1,9 +1,14 @@
-import UsersModel from "../models/UsersModel";
-const express = require("express");
+import UsersModel from "../models/UsersModel.js";
+import express from "express";
+import {signup, signin} from  '../middlewares/validate.js';
+import jwt from 'jsonwebtoken';
+import  bcrypt from 'bcrypt';
+import {uploader} from '../middlewares/multer.js'
+import path from 'path';
+const __dirname = path.resolve();
 const route = express.Router();
-const {signup, signin} = require( '../middlewares/validate.js');
-const jwt = require('jsonwebtoken');
-const  bcrypt = require('bcrypt');
+
+
 route.post("/", async (req, res) => {
   const { name, email, password } = req.body;
   let user = {};
@@ -63,14 +68,15 @@ route.post('/signin', async(req, res) => {
    return   res.send({ error: error.details[0].message})
   }
   UsersModel.findOne({
-    email: req.body.email
+    email: req.body.email,
+    account: req.body.account
     }).then((user) => {
      if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
             let token = jwt.sign(JSON.parse(JSON.stringify(user)), process.env.SECRET_TOKEN, {
                 expiresIn: 1440
             })
-           return  res.header("auth_token",token).json({token, user})
+           return  res.header("auth_token",token).json({success: true, token, user})
         } 
         else {
            
@@ -101,10 +107,52 @@ route.get("/:id", async (req, res) => {
   if(!req.params.id) {
     return res.status(400).send('Missing URL parameter: username')
   }
-  const user = await UsersModel.find({ _id: req.params.id });
-  res.json(user);
+  await UsersModel.findOne({ _id: req.params.id })
+  .then(user => {
+    if(user){
+      return  res.json({success: true,user})
+    }
+    else{
+      return  res.json({success: false, message: 'user does not exists'})
+     }
+  })
+  .catch(err => {
+    return res.json({success: false, message: "Server error"})
+  });
+  
 });
 
+route.put('/update/:id', (req, res) => {
+  if(!req.params.id) {
+    return res.status(400).send('Missing URL parameter: username')
+  }
+  UsersModel.findOneAndUpdate({
+    _id: req.params.id
+  }, req.body, {
+    new: true
+  })
+  .then(doc => {
+      res.json({success: true, newData: doc})
+    })
+  .catch(err => {
+      res.json({success: true, message:err})
+  })
+
+})
 
 
-module.exports = route;
+//upload image
+
+route.post('/upload/post', uploader.single('photo') ,(req , res) => {
+  try {
+    //console.log("logging req.file: ", req.file);
+    console.log(req.body.caption)
+    res.send({path: `${req.file.filename}`});
+  } catch (err) {
+    console.log(err)
+    res.json({success: false, message:err});
+  }
+})
+
+
+export default route;

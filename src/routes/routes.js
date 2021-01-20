@@ -1,7 +1,10 @@
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup'
 import Home from '../pages/Home'
-
+import UserPage from '../pages/UserPage';
+import ClinicPage from '../pages/ClinicPage';
+import ClientPage from '../pages/Clients';
+import Messages from '../pages/Messages'
 
 export const routes = [
     {
@@ -20,7 +23,27 @@ export const routes = [
         name: "Home",
         path: "/",
         Component: Home,
-        isLoggedIn: false,
         exact: true
-    }
+    },
+    {
+        name: "Users",
+        path: "/users",
+        Component: ClientPage,
+    },
+    {
+        name: "User",
+        path: "/user/:name/:id",
+        Component: UserPage,
+    },
+    {
+        name: "Clinic",
+        path: "/clinic/:name/:id",
+        Component: ClinicPage,
+    },
+    {
+        name: "Messages",
+        path: "/messages/:id",
+        Component: Messages,
+        isLoggedIn: true
+    },
 ]

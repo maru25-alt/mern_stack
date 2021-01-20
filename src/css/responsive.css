@@ -1,0 +1,68 @@
+/* Normal desktop :992px. */
+@media screen and (min-width: 992px) and (max-width: 1500px) {
+  .chatView {
+    display: none;
+  }
+}
+
+/* Tablet desktop :768px. */
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .chat__container {
+    width: 60%;
+  }
+  .sidebar {
+    width: 40%;
+  }
+  .chatView {
+    display: none;
+  }
+}
+
+/* small mobile :320px. */
+@media screen and (max-width: 767px) {
+  .menu {
+    left: 0;
+    right: auto;
+  }
+  .navbar__form {
+    width: 80% !important;
+  }
+  .signin__form {
+    width: 80%;
+  }
+
+  .signin__selectUser label {
+    margin-bottom: 10px;
+  }
+  .menuContainer {
+    left: 0;
+    right: auto;
+  }
+
+  .userprofile {
+    width: 90%;
+  }
+
+  .profile__body {
+    width: 100%;
+  }
+  .gallery .img_Container {
+    width: 100%;
+  }
+
+  .messages__container {
+    height: 100vh;
+  }
+  .chat__container {
+    width: 100%;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .smallDeviceView {
+    display: none;
+  }
+  .chatView {
+    display: block;
+  }
+}

@@ -1,18 +1,16 @@
-const Joi = require('@hapi/joi');
+import Joi from'@hapi/joi';
 
-const SignupSchema = Joi.object({
+export const signup = Joi.object({
     name: Joi.string().min(3).required(),
     email: Joi.string().required().email(),
     password: Joi.string().min(6).required(),
+    account: Joi.string().required(),
 })
 
-const SigninSchema = Joi.object({
+export const signin = Joi.object({
     email: Joi.string().required(),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    account: Joi.string().required(),
 })
 
 
-module.exports = {
-    signin: SigninSchema,
-    signup: SignupSchema
-};

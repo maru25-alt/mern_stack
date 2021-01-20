@@ -1,5 +1,6 @@
 import express from "express";
 import AdsModel from "../models/AdsModel.js";
+
 const route = express.Router();
 
 route.post("/", async (req, res) => {

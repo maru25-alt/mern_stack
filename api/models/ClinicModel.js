@@ -1,4 +1,4 @@
-const mongoose = require("../config/mongodb");
+import mongoose from "../config/mongodb.js";
 
 const { Schema } = mongoose;
 
@@ -19,42 +19,83 @@ const ClinicSchema = new Schema({
     type: String,
     required: true,
   },
+  logo: {
+     type: String,
+     default: ""
+  },
+  bio: {
+    type: String,
+    default: ""
+  },
+  website: {
+    type: String,
+    default: ""
+  },
+  telephone: {
+    type: String,
+    default: ""
+  },
   address: {
-    address: {
-      type: String,
+    type:{
+      address:  String,
+      zip: Number,
+      state: String,
+      country: String
     },
-    zip: {
-      type: Number,
-    },
-    province: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    country: {
-      type: String,
-     }
+    default: []
   },
   prices: {
-    min: {
-      type: String,
+    type: {
+      min: Number,
+      max: Number
     },
-    max: {
-      type: String,
-    },
+    default: {}
   },
   hours:{
-    open: {
-      type: String,
+    type: {
+      open:  String,
+      close: String,
     },
-    close: {
-      type: String,
-    },
+    default: {}
   },
+  date: { 
+    type: Date, default: Date.now
+   },
+  services: {
+    type: Array,
+    default: []
+  },
+  comments: {
+    type : [{
+      sender: String,
+      message: String, 
+      recomment: Boolean, 
+      date: {type: Date, default: Date.now}
+    }],
+    default: []
+  },
+  gallery:{
+    type: [
+      {
+        id: String,
+        img: String,
+        caption: String
+      }
+    ],
+    default: []
+  },
+  doctors: {
+    type : [{
+        name: String,
+        speciality: String,
+        experience: Number
+    }],
+    default: []
+  }
 });
 
 const ClinicModel = mongoose.model("clinics", ClinicSchema, "accounts");
-module.exports = ClinicModel;
+//module.exports = ClinicModel;
 
+export default ClinicModel
 // The alternative to the export model pattern is the export schema pattern.

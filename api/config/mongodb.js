@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import mongoose  from'mongoose';
+import  dotenv from 'dotenv';
 
 dotenv.config()
-const connection_url = process.env.DB_CONNECT;
+const connection_url = process.env.LOCAL_DB_CONNECT;
 
 mongoose.connect(connection_url, {
     useCreateIndex: true,
@@ -12,8 +12,8 @@ mongoose.connect(connection_url, {
 })
 
 mongoose.connection.once('open', ()=> {
-    console.log("db connnected")
+    console.log("db connnected localhost db")
 })
 
 
-module.exports = mongoose;
+export default mongoose;

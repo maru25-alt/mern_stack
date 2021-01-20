@@ -1,0 +1,170 @@
+.clinic__page {
+  width: 80%;
+  border: 1px solid #efefef;
+  margin: 50px auto;
+  background-color: white !important;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+.clinic__header {
+  border-bottom: 1px solid grey;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header__name {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.edit-icon {
+  /* margin-top: -20px;
+  margin-right: -20px; */
+}
+.clinic__section {
+  padding: 20px;
+  border-bottom: 1px solid grey;
+}
+
+.section__heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section__heading .title {
+  font-weight: 700;
+  flex: 1;
+}
+
+.listing li {
+  list-style: circle;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+.gallery .img_Container {
+  width: 45%;
+  margin: 10px;
+}
+
+.section__content li {
+  list-style: circle;
+}
+
+.testimonies .testimony {
+  border-bottom: dotted 2px #10b301;
+  padding: 20px;
+}
+.testimony .name {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.testimony .userPic {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.testimony div {
+  margin-left: 10px;
+}
+.recommendent {
+  color: #10b301;
+}
+.not__recommendent {
+  color: red;
+}
+
+.service__badge {
+  display: flex !important;
+  align-items: center;
+  background-color: #10b301;
+  padding: 5px;
+  border-radius: 10px;
+  color: #efefef;
+}
+
+.service__badge p {
+  word-wrap: break-word;
+  width: 50%;
+  flex: 1;
+}
+
+.doctor {
+  text-align: center;
+  position: relative;
+  width: 80%;
+  background-color: #f1f2f4 !important;
+  margin-bottom: 10px;
+}
+.doctor .control__buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  display: none;
+}
+
+.doctor:hover .control__buttons {
+  display: block;
+}
+.doctor:hover {
+  background-color: #10b301 !important;
+  color: #efefef;
+}
+.doctor .text-muted {
+  font-size: x-small;
+}
+.doctor hr {
+  margin: 0;
+}
+
+.doctor .title {
+  margin-bottom: 20px;
+}
+
+.gallery_container {
+  background-color: #f1f2f4 !important;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  padding: 0 !important;
+  margin-left: 20px;
+}
+.gallery_container:hover {
+  transform: scale(1.01);
+}
+.img__container {
+  position: relative;
+}
+
+.gallery_container:hover .action__btns {
+  display: block;
+}
+
+.img__container .action__btns {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%);
+  background-color: #333;
+  display: none;
+}
+
+.img__container .action__btns .btn .fa {
+  color: #fff !important;
+}
+.gallery_container img {
+  object-fit: contain;
+  width: 100%;
+}
+.clinic__section .testimonies {
+  border-bottom: none !important;
+}

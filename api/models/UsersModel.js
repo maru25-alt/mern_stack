@@ -1,4 +1,4 @@
-const mongoose = require("../config/mongodb");
+import  mongoose from "../config/mongodb.js"
 
 const { Schema } = mongoose;
 
@@ -25,7 +25,16 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  posts: {
+    type: [{
+      date: {type: Date, default: Date.now},
+      caption: String,
+      img: String
+    }],
+    default: []
+  }
 });
 
 const UsersModel = mongoose.model("users", UserSchema, "accounts");
-module.exports = UsersModel;
+
+export default UsersModel;

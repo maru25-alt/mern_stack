@@ -1,0 +1,87 @@
+.userprofile {
+  background-color: #fff;
+  width: 60%;
+  margin: 80px auto;
+}
+
+.profile__notfound {
+  padding: 100px;
+  color: red;
+  font-size: 3em !important;
+}
+
+.profile__header {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #9698a6;
+  padding: 20px;
+  align-items: center;
+}
+
+.initial {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #1d4354;
+  color: #fff;
+  text-align: center;
+  line-height: 70px;
+  font-size: 2em;
+  border: 1px solid white;
+}
+
+.profileHeader__username {
+  flex: 1;
+  margin-left: 10px;
+}
+.profileHeader__username p {
+  word-wrap: break-word;
+  width: 90%;
+}
+
+.profileHeader__username .btn {
+  font-size: smaller !important;
+  padding: 0 !important;
+}
+
+.profile__body {
+  padding: 20px;
+  margin: auto;
+  width: 80%;
+}
+
+.post {
+  border-bottom: 2px solid #f1f2f4;
+  position: relative;
+  margin-bottom: 10px;
+}
+.post:hover {
+  transform: scale(0.99);
+}
+.post img {
+  width: 100%;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.post__buttons {
+  position: absolute;
+  background-color: #444;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%);
+  display: none;
+}
+
+.post:hover .post__buttons {
+  display: block;
+}
+
+.post__buttons button {
+  color: #fff;
+}
+
+.post__buttons button:hover {
+  color: #10b301;
+}

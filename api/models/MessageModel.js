@@ -1,11 +1,18 @@
-import mongoose from "../config/mongodb";
+import mongoose from "../config/mongodb.js";
 
 const { Schema } = mongoose;
 
 const messageSchema = new Schema({
-  sender: String,
-  body: String,
-  timestamp: Number, // String is shorthand for {type: String}
+  user1: String,
+  user2: String,
+  messages: {
+    type: [{
+      timestamp: {type: Date, default: Date.now},
+      text: String,
+      sender: String
+    }],
+    default: []
+  },
 });
 
 const MessageModel = mongoose.model("Message", messageSchema, "messages");

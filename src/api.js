@@ -1,18 +1,24 @@
 import axios from "axios";
+import {LoginString} from './app/localStorage'
 
 //export const API_BASE_URL = "http://kapstone-five.vercel.app/api";
-export const API_BASE_URL = "http://localhost:4000/api";
+export const API_BASE_URL = "http://localhost:5000/api";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
 });
 
-export default axiosInstance;
-
+//fetch all clinics
 export const fetchClinics = async () => {
-  const { data } = await axiosInstance.get("/clinics");
+  const { data } = await axiosInstance.get("/accounts/clinics");
   return data;
 };
+
+//fetch  clients
+export const fetchClients = async () => {
+  const {data } = await axios.get('/users')
+  return data
+}
 
 // SignUp clinic
 export const clinicSignup = async (data, callback) => {
@@ -54,5 +60,27 @@ export const clinicSignin = async (data, callback) => {
   .catch(err => {
     console.log(err)
     callback({error: "something when wrong , try again later"})
-});
-};
+   });
+ };
+
+
+
+ export const  SentMessagesConnection = async(id, history) => {
+  const user1 = localStorage.getItem(LoginString.ID)
+  if(user1){
+    axiosInstance.post('/messages/connect', {user1: user1, user2: id})
+    .then(res => {
+        console.log(res)
+        if(res.data.success){
+            history.push(`/messages/${res.data.doc}`);
+        }
+    })
+  }
+  else{
+    history.push("/signin");
+  }
+ 
+     
+ }
+
+export default axiosInstance;

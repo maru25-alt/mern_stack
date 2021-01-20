@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../css/footer.css'
+import { FormattedMessage} from 'react-intl';
 
 function Footer() {
     const year = new Date().getFullYear();
@@ -14,7 +15,9 @@ function Footer() {
                 <a href="/"> <i className="fab fa-youtube " ></i> </a>
             </div>
             <hr/>
-            <p> Copyright &copy;{year} All rights reserved  COMPANYNAME </p>
+            <p> 
+                {/* <FormattedMessage id="footer" year ={year}/>  */}
+                Copyright &copy;{year} All rights reserved  COMPANYNAME </p>
         </div>
     )
 }
